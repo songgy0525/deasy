@@ -1,0 +1,82 @@
+.jobs-page { padding: 48px 32px 80px; }
+.jobs-inner { max-width: 900px; margin: 0 auto; }
+.jobs-header { margin-bottom: 28px; }
+.jobs-header h2 { font-size: 28px; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.02em; }
+.jobs-header p { font-size: 13px; color: var(--text-sub); }
+
+.jobs-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--text);
+}
+
+.jobs-tabs button {
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-sub);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: all 0.1s;
+}
+
+.jobs-tabs button:hover { color: var(--text); }
+.tab-active { color: var(--point) !important; border-bottom-color: var(--point) !important; }
+
+.job-list { display: flex; flex-direction: column; border: 1px solid var(--border); }
+
+.job-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  background: #fff;
+  transition: background 0.1s;
+}
+
+.job-card:last-child { border-bottom: none; }
+.job-card:hover { background: var(--bg-sub); }
+
+.job-company-avatar {
+  width: 40px; height: 40px;
+  background: var(--bg-sub);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.job-info { flex: 1; }
+.job-info h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.job-company { font-size: 12px; color: var(--text-sub); margin-bottom: 8px; }
+.job-tags { display: flex; gap: 6px; }
+
+.job-tag {
+  font-size: 10px; font-weight: 700;
+  padding: 2px 8px;
+  background: transparent;
+  color: var(--text-sub);
+  border: 1px solid var(--border);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.job-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.job-salary { font-size: 12px; font-weight: 700; color: var(--point); }
+
+.apply-btn {
+  padding: 7px 16px;
+  background: transparent;
+  color: var(--point);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border: 1px solid var(--point);
+  transition: all 0.1s;
+}
+
+.apply-btn:hover { background: var(--point); color: #fff; }

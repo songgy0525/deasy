@@ -1,0 +1,71 @@
+.brief-page { padding: 48px 32px 80px; }
+.brief-inner { max-width: 900px; margin: 0 auto; }
+
+.brief-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--text);
+}
+
+.brief-header h2 { font-size: 28px; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.02em; }
+.brief-header p { font-size: 13px; color: var(--text-sub); }
+
+.post-brief-btn {
+  padding: 10px 18px;
+  background: var(--point);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition: background 0.1s;
+  flex-shrink: 0;
+}
+
+.post-brief-btn:hover { background: var(--point-hover); }
+
+.brief-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0; border: 1px solid var(--border); }
+
+.brief-card {
+  padding: 20px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background 0.1s;
+}
+
+.brief-card:hover { background: var(--bg-sub); }
+
+.brief-status {
+  display: inline-block;
+  background: var(--point);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  align-self: flex-start;
+}
+
+.brief-card h3 { font-size: 14px; font-weight: 700; line-height: 1.4; }
+.brief-client { font-size: 12px; color: var(--text-sub); }
+.brief-meta { display: flex; gap: 16px; font-size: 12px; font-weight: 600; color: var(--text-sub); }
+
+.propose-btn {
+  width: 100%;
+  padding: 9px;
+  border: 1px solid var(--text);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  background: transparent;
+  margin-top: 4px;
+  letter-spacing: 0.03em;
+  transition: all 0.1s;
+}
+
+.propose-btn:hover { background: var(--text); color: #fff; }

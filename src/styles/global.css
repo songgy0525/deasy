@@ -1,0 +1,32 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #FFFFFF;
+  --bg-sub: #F8F9FA;
+  --point: #2D8659;
+  --point-hover: #1E6B47;
+  --point-light: #F0F7F3;
+  --text: #111111;
+  --text-sub: #555555;
+  --text-disabled: #AAAAAA;
+  --border: #DDDDDD;
+  --error: #C0392B;
+  --info: #2563EB;
+  --radius: 2px;
+  --radius-sm: 2px;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+}
+
+button { cursor: pointer; font-family: inherit; border: none; outline: none; }
+a { text-decoration: none; color: inherit; }
+input, textarea, select { font-family: inherit; }
