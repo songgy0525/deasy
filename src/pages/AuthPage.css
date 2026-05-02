@@ -120,3 +120,10 @@
 
 .auth-link { text-align: center; font-size: 12px; color: var(--text-sub); margin-top: 20px; }
 .auth-link a { color: var(--point); font-weight: 700; }
+
+.auth-error {
+  color: #ef4444;
+  font-size: 13px;
+  text-align: center;
+  margin: -4px 0 4px;
+}
