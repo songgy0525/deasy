@@ -170,3 +170,10 @@
   .login-visual { display: none; }
   .login-box { width: 100%; }
 }
+
+.login-error {
+  color: #ef4444;
+  font-size: 13px;
+  text-align: center;
+  margin: -4px 0 4px;
+}

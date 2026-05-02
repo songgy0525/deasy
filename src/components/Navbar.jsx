@@ -1,4 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "./Navbar.css";
 
 const links = [
@@ -9,6 +10,17 @@ const links = [
 
 export default function Navbar() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const [user, setUser] = useState(() => {
+    const stored = localStorage.getItem("user");
+    return stored ? JSON.parse(stored) : null;
+  });
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/");
+  };
 
   return (
     <nav className="navbar">
@@ -24,8 +36,18 @@ export default function Navbar() {
         </ul>
 
         <div className="nav-actions">
-          <Link to="/login" className="btn-outline">Log in</Link>
-          <Link to="/upload" className="btn-primary">Upload work</Link>
+          {user ? (
+            <>
+              <Link to="/profile" className="btn-outline">{user.nickname}</Link>
+              <button className="btn-outline" onClick={handleLogout}>Log out</button>
+              <Link to="/upload" className="btn-primary">Upload work</Link>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="btn-outline">Log in</Link>
+              <Link to="/upload" className="btn-primary">Upload work</Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

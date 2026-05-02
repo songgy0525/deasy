@@ -6,18 +6,35 @@
  *   POST /api/auth/login          → 로그인 (email, password)
  *   GET  /api/auth/google         → 구글 OAuth 로그인
  *   POST /api/auth/logout         → 로그아웃
- *
- * 연결 후 할 것:
- *   - 로그인 성공 시 JWT 토큰 저장 (localStorage or cookie)
- *   - 실패 시 에러 메시지 표시
- *   - 구글 로그인 버튼 → OAuth 리다이렉트
  * =============================================
  */
 
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./LoginPage.css";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      const res = await axios.post("http://localhost:8080/api/auth/login", {
+        email,
+        password,
+      });
+      localStorage.setItem("user", JSON.stringify(res.data));
+      navigate("/");
+    } catch (err) {
+      setError("이메일 또는 비밀번호가 틀렸습니다.");
+    }
+  };
+
   return (
     <div className="login-page">
       <div className="login-box">
@@ -26,25 +43,32 @@ export default function LoginPage() {
         <h1>Sign in</h1>
         <p className="login-sub">to continue to palette</p>
 
-        <form className="login-form">
+        <form className="login-form" onSubmit={handleLogin}>
           <div className="login-field">
-            {/* TODO: onChange → email state */}
-            <input type="email" placeholder="Email" />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div className="login-field">
-            {/* TODO: onChange → password state */}
-            <input type="password" placeholder="Password" />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
           <div className="login-forgot">
             <Link to="#">Forgot password?</Link>
           </div>
-          {/* TODO: onSubmit → POST /api/auth/login */}
+          {error && <p className="login-error">{error}</p>}
           <button type="submit" className="login-submit">Next</button>
         </form>
 
         <div className="login-divider"><span>or</span></div>
 
-        {/* TODO: onClick → GET /api/auth/google */}
         <button className="google-btn">
           <svg width="18" height="18" viewBox="0 0 18 18">
             <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/>

@@ -13,10 +13,46 @@
  * =============================================
  */
 
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./AuthPage.css";
 
 export default function SignupPage() {
+  const navigate = useNavigate();
+  const [role, setRole] = useState("DESIGNER");
+  const [nickname, setNickname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await axios.post("http://localhost:8080/api/auth/signup", {
+        nickname,
+        email,
+        password,
+        role,
+      });
+      // 가입 성공 후 자동 로그인
+      const res = await axios.post("http://localhost:8080/api/auth/login", {
+        email,
+        password,
+      });
+      localStorage.setItem("user", JSON.stringify(res.data));
+      navigate("/");
+    } catch (err) {
+      const msg = err.response?.data;
+      if (typeof msg === "string") {
+        setError(msg);
+      } else {
+        setError("회원가입에 실패했습니다. 다시 시도해주세요.");
+      }
+    }
+  };
+
   return (
     <div className="auth-page">
       <div className="auth-card">
@@ -37,28 +73,51 @@ export default function SignupPage() {
 
         <div className="divider"><span>or</span></div>
 
-        <form className="auth-form">
-          {/* TODO: state로 role 관리 → 'DESIGNER' | 'CLIENT' */}
+        <form className="auth-form" onSubmit={handleSignup}>
           <div className="role-select">
-            <button type="button" className="role-btn role-active">🎨 Designer</button>
-            <button type="button" className="role-btn">💼 Client</button>
+            <button
+              type="button"
+              className={`role-btn ${role === "DESIGNER" ? "role-active" : ""}`}
+              onClick={() => setRole("DESIGNER")}
+            >
+              🎨 Designer
+            </button>
+            <button
+              type="button"
+              className={`role-btn ${role === "CLIENT" ? "role-active" : ""}`}
+              onClick={() => setRole("CLIENT")}
+            >
+              💼 Client
+            </button>
           </div>
           <div className="field">
             <label>Nickname</label>
-            {/* TODO: onChange → nickname state */}
-            <input type="text" placeholder="Your display name" />
+            <input
+              type="text"
+              placeholder="Your display name"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+            />
           </div>
           <div className="field">
             <label>Email</label>
-            {/* TODO: onChange → email state */}
-            <input type="email" placeholder="hello@example.com" />
+            <input
+              type="email"
+              placeholder="hello@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div className="field">
             <label>Password</label>
-            {/* TODO: onChange → password state */}
-            <input type="password" placeholder="8+ characters" />
+            <input
+              type="password"
+              placeholder="8+ characters"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
-          {/* TODO: onSubmit → POST /api/auth/signup */}
+          {error && <p className="auth-error">{error}</p>}
           <button type="submit" className="submit-btn">Get started</button>
         </form>
 
