@@ -36,10 +36,18 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private Provider provider = Provider.LOCAL;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     public enum Role {
-        DESIGNER, CLIENT
+        DESIGNER, CLIENT, ADMIN
+    }
+
+    public enum Provider {
+        LOCAL, GOOGLE
     }
 }

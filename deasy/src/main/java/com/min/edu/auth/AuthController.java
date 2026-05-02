@@ -24,4 +24,11 @@ public class AuthController {
         User user = authService.login(request);
         return ResponseEntity.ok(user);
     }
+
+    // OAuth 유저 role 설정
+    @PatchMapping("/role")
+    public ResponseEntity<User> updateRole(@RequestParam Long userId,
+                                           @RequestParam String role) {
+        return ResponseEntity.ok(authService.updateRole(userId, role));
+    }
 }

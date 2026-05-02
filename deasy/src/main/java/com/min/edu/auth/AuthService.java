@@ -25,6 +25,13 @@ public class AuthService {
          userRepository.save(user);
     }
 
+    public User updateRole(Long userId, String role) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("유저가 없습니다."));
+        user.setRole(User.Role.valueOf(role));
+        return userRepository.save(user);
+    }
+
     public User login(LoginRequest request){
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(()->new RuntimeException("존재하지 않는 이메일입니다."));
